@@ -1,0 +1,395 @@
+{% extends 'layout.html.twig' %}
+{% block mystyle %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<style>
+    .wrapper .container{
+        padding-left: 0px;
+        padding-right: 0px;
+    }.container:hover{
+border:none;
+         padding-right: 0px;
+     }
+
+    .wrapper {
+
+        width: 300px;
+        height: 500px;
+        background: white;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 0;
+        transform: scale(0.95);
+        transition: box-shadow 0.5s, transform 0.5s;
+    }
+    .wrapper:hover {
+        transform: scale(1);
+        box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
+    }
+    .wrapper .container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .wrapper .container .bottom {
+        width: 200%;
+        height: 20%;
+        transition: transform 0.5s;
+    }
+    .wrapper .container .bottom.clicked {
+        transform: translateX(-50%);
+    }
+    .wrapper .container .bottom h1 {
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper .container .bottom p {
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper .container .bottom .left {
+        height: 100%;
+        width: 50%;
+        background: #f4f4f4;
+        position: relative;
+        float: left;
+    }
+    .wrapper .container .bottom .left .details {
+        padding: 20px;
+        float: left;
+        width: calc(70% - 40px);
+    }
+    .wrapper .container .bottom .left .buy {
+        float: right;
+        width: calc(30% - 2px);
+        height: 100%;
+        background: #f1f1f1;
+        transition: background 0.5s;
+        border-left: solid thin rgba(0, 0, 0, 0.1);
+    }
+    .wrapper .container .bottom .left .buy i {
+        font-size: 30px;
+        padding: 30px;
+        color: #254053;
+        transition: transform 0.5s;
+    }
+    .wrapper .container .bottom .left .buy:hover {
+        background: #A6CDDE;
+    }
+    .wrapper .container .bottom .left .buy:hover i {
+        transform: translateY(5px);
+        color: #00394B;
+    }
+    .wrapper .container .bottom .right {
+        width: 50%;
+        background: #A6CDDE;
+        color: white;
+        float: right;
+        height: 200%;
+        overflow: hidden;
+    }
+    .wrapper .container .bottom .right .details {
+        padding: 20px;
+        float: right;
+        width: calc(70% - 40px);
+    }
+    .wrapper .container .bottom .right .done {
+        width: calc(30% - 2px);
+        float: left;
+        transition: transform 0.5s;
+        border-right: solid thin rgba(255, 255, 255, 0.3);
+        height: 50%;
+    }
+    .wrapper .container .bottom .right .done i {
+        font-size: 30px;
+        padding: 30px;
+        color: white;
+    }
+    .wrapper .container .bottom .right .remove {
+        width: calc(30% - 1px);
+        clear: both;
+        border-right: solid thin rgba(255, 255, 255, 0.3);
+        height: 50%;
+        background: #BC3B59;
+        transition: transform 0.5s, background 0.5s;
+    }
+    .wrapper .container .bottom .right .remove:hover {
+        background: #9B2847;
+    }
+    .wrapper .container .bottom .right .remove:hover i {
+        transform: translateY(5px);
+    }
+    .wrapper .container .bottom .right .remove i {
+        transition: transform 0.5s;
+        font-size: 30px;
+        padding: 30px;
+        color: white;
+    }
+    .wrapper .container .bottom .right:hover .remove, .wrapper .container .bottom .right:hover .done {
+        transform: translateY(-100%);
+    }
+    .wrapper .inside {
+        z-index: 9;
+        background: #92879B;
+        width: 140px;
+        height: 140px;
+        position: absolute;
+        top: -70px;
+        right: -70px;
+        border-radius: 0px 0px 200px 200px;
+        transition: all 0.5s, border-radius 2s, top 1s;
+        overflow: hidden;
+    }
+    .wrapper .inside .icon {
+        position: absolute;
+        right: 85px;
+        top: 85px;
+        color: white;
+        opacity: 1;
+    }
+    .wrapper .inside:hover {
+        width: 100%;
+        right: 0;
+        top: 0;
+        border-radius: 0;
+        height: 80%;
+    }
+    .wrapper .inside:hover .icon {
+        opacity: 0;
+        right: 15px;
+        top: 15px;
+    }
+    .wrapper .inside:hover .contents {
+        opacity: 1;
+        transform: scale(1);
+        transform: translateY(0);
+    }
+    .wrapper .inside .contents {
+        padding: 5%;
+        opacity: 0;
+        transform: scale(0.5);
+        transform: translateY(-200%);
+        transition: opacity 0.2s, transform 0.8s;
+    }
+    .wrapper .inside .contents table {
+        text-align: left;
+        width: 100%;
+    }
+    .wrapper .inside .contents h1, .wrapper .inside .contents p, .wrapper .inside .contents table {
+        color: white;
+    }
+    .wrapper .inside .contents p {
+        font-size: 13px;
+    }
+    .search {
+        display: inline-block;
+        position: relative;
+        height: 35px;
+        width: 35px;
+        box-sizing: border-box;
+        margin: 0px 8px 7px 0px;
+        padding: 7px 9px 0px 9px;
+        border: 3px solid #913D88;
+        border-radius: 25px;
+        transition: all 200ms ease;
+        cursor: text;
+    }
+    .search:after {
+         content: "";
+         position: absolute;
+         width: 3px;
+         height: 20px;
+         right: -5px;
+         top: 21px;
+         background: @icn-color;
+         border-radius: 3px;
+         transform: rotate(-45deg);
+         transition: all 200ms ease;
+     }
+
+    .active, .search:hover {
+         width: 200px;
+         margin-right: 0px;
+    }
+
+    .search:after {
+         height: 0px;
+     }
+
+
+    input {
+        width: 100%;
+        border: none;
+        box-sizing: border-box;
+        font-family: Helvetica;
+        font-size: 15px;
+        color: inherit;
+        background: transparent;
+        outline-width: 0px;
+    }
+
+
+
+</style>
+{% endblock %}
+{% block content %}
+<br>
+<br>
+    <h1 style="color: #9B2847;font-family: 'Montserrat', sans-serif;font-size: 30px;text-align: center;font-weight: bold;">Product List</h1>
+    <div class="cntr" style="padding-left: 10px;">
+        <div class="cntr-innr">
+            <label class="search" for="inpt_search" >
+                <input id="inpt_search" type="text" placeholder="Search ..." style="padding-bottom:10px;color: #9B2847;" />
+            </label>
+
+        </div>
+    </div>
+
+    <div class="row" id="content">
+    {% for B in pagination %}
+<div class="col-md-3">
+<div class="wrapper">
+
+    <div class="container">
+        {% if(B.qte ==0 ) %}
+        <div class="top" style="background: url({{ asset('uploads/outofstock.png') }}) no-repeat center center;height: 80%;
+        width: 100%;
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        "></div>
+        {% else %}
+        <div class="top" style="background: url({{ asset('uploads/'~B.photo) }}) no-repeat center center;height: 80%;
+                width: 100%;
+                -webkit-background-size: 100%;
+                -moz-background-size: 100%;
+                -o-background-size: 100%;
+                background-size: 100%;
+                "></div>
+            {% endif %}
+        <div class="bottom">
+            <div class="left">
+                <div class="details">
+                    <h1>{{ B.nom }}</h1>
+                    <p>{{ B.prix }}$</p>
+                </div>
+                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+            </div>
+            <div class="right">
+                <div class="done"><i class="material-icons">done</i></div>
+                <div class="details" style="padding: 0px;">
+
+                    <button class="btn btn-light"  style="margin-top: 6px;">   <a href="{{ path('prod_show',{'id':B.id}) }}" style="color: black;:hover{text-underline: none;};"> show</a></button>
+                    <button class="btn btn-light"  style="margin-top: 6px;">   <a href="{{ path('addpanier',{'id': B.id}) }}" style="color: black;:hover{text-underline: none;};"> Add To Cart</a></button>
+                <div style="margin-top: 6px;">
+                    {{ twitterButton() }}
+                    {{ facebookButton() }}
+
+                </div>
+                </div>
+                <div class="remove"><i class="material-icons">clear</i></div>
+            </div>
+        </div>
+    </div>
+    <div class="inside">
+        <div class="icon"><i class="material-icons">info_outline</i></div>
+        <div class="contents" style="padding:0px;">
+            <table>
+               <thead>
+               <th><h6 style="text-align: center;padding-top: 15px;color: #E3E3D8;font-weight: bold;font-family: 'Montserrat', sans-serif;">Quick tutorial
+                       <a  href="{{ path('favoris',{'id':B.id}) }}"><i class="fa fa-heart" style="color: red;padding-left: 30px;" onclick="alert('Product Added to Wishlist!');"></i></a>
+
+                   </h6></th>
+
+               <th>
+               </thead>
+                <tbody>
+                <tr>
+                    <td><video width="300" height="200" controls style=":hover{border:none;};border: none;">
+                            <source src="{{ asset('uploads/'~B.tutorial) }}" type="video/mp4">
+                        </video>
+                    <br>
+                    <br>
+                    <br>
+                    <h6 style="text-align: center;color: #E3E3D8;font-weight: bold;font-family: 'Montserrat', sans-serif;">Velo Model : {{ B.modele }}</h6>
+
+                        <h6 style="text-align: center;color: #E3E3D8;font-weight: bold;font-family: 'Montserrat', sans-serif;">Velo Type : {{ B.type }}</h6></td>
+                        <h6 style="text-align: center;color: #E3E3D8;font-weight: bold;font-family: 'Montserrat', sans-serif;">Quantity : {{ B.qte }}</h6></td>
+                </tr></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+    {% endfor %}
+</div>
+    <br>
+<div class="navigation" style="text-align: center;">
+    {{ knp_pagination_render(pagination) }}
+</div>
+<br>
+<br>
+<script></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 0;
+            var entitySelector = $("#content").html('');
+
+            var value = $(this).val();
+              console.log(value);
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+
+                    type: "GET",
+                    url: "{{ path('search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+
+                        var result = JSON.parse(msg);
+                        console.log(result);
+                        $.each(result, function(key, arr) {
+                            $.each(arr, function(id, value) {
+
+
+                                entitySelector.append('<h3>'+value+ '</h3>')
+                            });
+                        });
+
+                    }
+                });
+            }
+        });
+    });
+
+    $('.buy').click(function(){
+        $('.bottom').addClass("clicked");
+    });
+
+    $('.remove').click(function(){
+        $('.bottom').removeClass("clicked");
+    });
+    $("#inpt_search").on('focus', function () {
+        $(this).parent('label').addClass('active');
+    });
+
+    $("#inpt_search").on('blur', function () {
+        if($(this).val().length == 0)
+            $(this).parent('label').removeClass('active');
+    });
+</script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock  %}

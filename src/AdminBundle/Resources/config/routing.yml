@@ -1,0 +1,6 @@
+admin_homepage:
+    path:     /
+    defaults: { _controller: AdminBundle:Dashboard:index }
+admin_AfficherUser:
+    path:     /AfficherUser
+    defaults: { _controller: AdminBundle:Dashboard:AfficherUser}

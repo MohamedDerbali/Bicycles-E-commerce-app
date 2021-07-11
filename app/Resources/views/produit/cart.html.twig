@@ -1,0 +1,29 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+{% block content %}
+   <div class="container">
+
+       {% if items | length > 0%}
+{% for x in items %}
+    <a href="{{ path('removePanier',{'id': x.produit.id}) }}">
+        <i class="fa fa-trash"></i>
+    </a>
+
+           {{ x.produit.prix * x.qte }}
+
+         <br>
+
+
+{% endfor %}
+           le total du panier:
+           {{ total }}
+       {% else %}
+
+           <p> votre panier est vide !</p>
+       {% endif %}
+
+   </div>
+
+{% endblock %}
+

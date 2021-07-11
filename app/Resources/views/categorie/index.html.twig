@@ -1,0 +1,43 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <h1>Categories list</h1>
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td><a href="{{ path('cat_show', { 'id': categorie.id }) }}">{{ categorie.id }}</a></td>
+                <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cat_show', { 'id': categorie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cat_edit', { 'id': categorie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cat_new') }}">Create a new categorie</a>
+        </li>
+    </ul>
+    </div>
+{% endblock %}

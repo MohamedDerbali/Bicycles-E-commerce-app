@@ -1,0 +1,139 @@
+{% extends 'layout.html.twig' %}
+{% block mystyle %}
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .rating {
+            color: #ddd;
+            float: left;
+        }
+
+        .rating > input { display: none; }
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: gray;
+            float: right;
+
+        }
+
+
+        .rating > input:checked ~ label, /* show gold star when clicked */
+        .rating:not(:checked) > label:hover, /* hover current star */
+        .rating:not(:checked) > label:hover ~ label { color:  darkred ;  } /* hover previous stars in list */
+
+        .rating > input:checked + label:hover, /* hover current star when changing rating */
+        .rating > input:checked ~ label:hover,
+        .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+        .rating > input:checked ~ label:hover ~ label { color:darkred;  }
+    </style>
+
+{% endblock %}
+{% block content %}
+    <div class="container" >
+   <div style="text-align: center"> <h1>{{ produit.nom }}</h1>
+
+
+
+                <img src="{{ asset('uploads/'~produit.photo) }}" style="width: 400px;border: 1px solid black;"></img>
+
+
+                <h6>{{ produit.prix }} $</h6>
+
+       <div style="text-align: center;width: 1000px;background-color:#f2f2f2;margin-left: 200px;padding: 40px;">
+<h1 style="margin-top: -10px;"> Comments :</h1>
+
+           {% for cc in com %}
+               <div class="col-md-2">
+                   <img src="{{ asset('uploads/'~cc.userid.photo) }}" alt="Avatar" class="avatar">
+               </div> <div class="col-md-10" style="margin-top: -6px;margin-left: -30px;">
+           <p align="left" class="text-light bg-dark" style="border-radius: 40px;background-color:#b7b7b7;padding: 20px;">
+               <span >{{ cc.comment }}</span>
+
+           {% if(cc.userid.id==usrid) %}
+             <span style="margin-left: 90%">
+               <a href="{{ path('removeCmtr',{'id': cc.id,'prodid':cc.produit.id}) }}" style="text-align: right;"> <i class="fa fa-trash"></i>
+               </a>
+               </span>
+           {% endif %}
+
+           </p>
+               <span>{{ cc.date|date('y/m/d') }}</span>
+               <br>
+               <br>
+           </div>
+               <br>
+               <br>
+               <br>
+
+
+       {% endfor %}
+           <div class="col-md-12">
+           <hr style="border-color:black;">
+           </div><div class="col-md-2">
+               <img src="{{ asset('uploads/'~img) }}" alt="Avatar" class="avatar">
+           </div>
+
+
+       <form method="post">
+           <div class="col-md-10" style="margin-top: -6px;margin-left: -30px;">
+           <div class="md-form">
+               <i class="fas fa-pencil-alt prefix"></i>
+               <textarea type="text" id="form10" class="md-textarea form-control" rows="3" placeholder="New Comment .." name="comment"></textarea>
+
+           </div>
+           </div>
+<br>
+<div class="col-md-2">
+    <h3>Rate us :</h3>
+</div>
+
+           <div class="col-md-10" style="margin-top: 18px;">
+           <fieldset class="rating">
+               <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+               <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+               <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+               <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+               <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+               <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+               <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+               <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+               <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+               <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+           </fieldset>
+           </div>
+           <div class="col-md-2">
+           <button type="submit" class="btn btn-danger" >Comment</button>
+           </div>
+               </form>
+
+
+        <li>
+            <a href="{{ path('prod_index') }}">Back to the list</a>
+        </li>
+
+
+       </div></div></div>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}
+

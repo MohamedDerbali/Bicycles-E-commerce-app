@@ -1,0 +1,101 @@
+{% extends "layout.html.twig" %}
+{% block css%}
+    <link id="favicon" rel="shortcut icon" href="{{ asset('favicon.png')}}" type="image/png" />
+    <link rel="apple-touch-icon" sizes="194x194" href="{{ asset('apple-touch-icon.png')}}" type="image/png" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ asset('assets/css/elisyam-1.5.css') }}">
+{% endblock %}
+{% block inscription %}
+    <div class="container">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Ajouter un  utilisateur </h4>
+                </div>
+                <div class="widget-body">
+                    {{ form_start(form) }}
+                    <h3>Information de connexion</h3>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            {{ form_row(form.Username) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.Email) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.roles) }}
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            {{ form_row(form.Password) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Information generale</h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ form_row(form.Cin) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Nom) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Prenom) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Sexe) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            {{ form_row(form.Date_naissance) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Num_tel) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Civilite) }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_row(form.Photo) }}
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Adresse</h3>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            {{ form_row(form.Pays) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.Ville) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.Adresse) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_row(form.Poste) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_row(form.Code_postal) }}
+                        </div>
+
+                    </div>
+
+
+
+                    <button class="btn btn-success btn-xs">Enregistrer</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        </di>
+{% endblock  %}

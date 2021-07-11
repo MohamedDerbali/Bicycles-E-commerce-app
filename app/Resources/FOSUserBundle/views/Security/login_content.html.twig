@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="authentication-form mx-auto">
+    <div class="logo-centered">
+        <a href="javascript:;">
+            <img src="{{ asset('assets/img/final.png') }}" alt="logo">
+        </a>
+    </div>
+
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        {% if csrf_token %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        {% endif %}
+
+        {% if error %}
+            <div class="alert alert-danger mb-5">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %} 
+        <div class="group material-input">
+            <input type="text" name="_username" value="{{ last_username }}" autocomplete="username" required autofocus>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>{{ 'security.login.username'|trans }}</label>
+        </div>
+        <div class="group material-input">
+            <input type="password" name="_password" autocomplete="current-password" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>{{ 'security.login.password'|trans }}</label>
+        </div>
+        <div class="row">
+            <div class="col text-left">
+                <div class="styled-checkbox">
+                    <input type="checkbox" name="_remember_me" value="on" id="rememberme">
+                    <label for="rememberme">{{ 'security.login.remember_me'|trans }}</label>
+                </div>
+            </div>
+            <div class="col text-right">
+                <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié</a>
+            </div>
+        </div>
+        <div class="sign-btn text-center">
+            <input class="btn btn-lg btn-gradient-03" type="submit" id="_submit" name="_submit"
+                   value="{{ 'security.login.submit'|trans }}" />
+        </div>
+    </form>
+</div>

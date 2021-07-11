@@ -1,0 +1,17 @@
+
+{% extends 'admin.html.twig' %}
+{% block body %}
+    <div class="container">
+        <h1>Statistique</h1>
+
+        <div id="div_chart"></div>
+    </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw(piechart, 'div_chart') }}
+    </script>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

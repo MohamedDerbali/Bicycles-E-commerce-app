@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+templatetasarim.com	TRUE	/	FALSE	1999999999	language	en-gb
+templatetasarim.com	TRUE	/	FALSE	1999999999	currency	USD
+templatetasarim.com	TRUE	/	FALSE	1999999999	OCSESSID	f779bbd15f308930208ed9ed9c
+
